@@ -1,0 +1,187 @@
+body {
+  background-color: white;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+h1 {
+  color: black;
+  font-size: 400%;
+  }
+
+
+#list {
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+  border: 1px;
+  width: 100%;
+}
+
+#list td,
+#list th {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+#list tr:nth-child(odd) {
+  background-color: #F2F2F2;
+}
+
+#list tr:hover {
+  background-color: rgb(218, 215, 215);
+}
+
+#list th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #FFFFFF;
+  color: black;
+}
+
+.btnadd {
+  padding: 10px 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: blue;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.btnadd:hover {
+  color: #047BFC;
+  background-color: #b3b3b3;
+}
+
+.btnedit {
+  background-color: green;
+  color: white;
+  padding: 6px 10px;
+  margin: auto;
+  border: auto;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btnedit:hover {
+  background-color: rgb(21, 120, 57);
+}
+
+.btndel {
+  background-color: #ff002b;
+  color: white;
+  padding: 6px 10px;
+  margin: auto;
+  border: auto;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btndel:hover {
+  background-color: #560513;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+input[type=text], select, textarea, [type=number], [type=date] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: #04cefc;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+  font-weight: bold;
+}
+
+input[type=submit]:hover {
+  background-color: #2c2c2c;
+}
+
+.container {
+  border-radius: 15px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.col-15 {
+  float: left;
+  width: 15%;
+  margin-top: 6px;
+  color: black;
+}
+
+.col-85 {
+  float: left;
+  width: 85%;
+  margin-top: 6px;
+}
+
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit]{
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+.flex {
+  display: flex;
+}
+
+.pagination {
+  margin-left:none;
+  border: none;
+  border-radius:none;
+  padding: none;
+  background-color: whitesmoke;
+}
+
+.pagination a{
+  text-decoration: none;
+}
+
+button[type=submit] {
+  background-color:navy;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+  font-weight: bold;
+}
+
+button[type=submit]:hover {
+  background-color: #2c2c2c;
+}
