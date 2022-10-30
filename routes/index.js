@@ -99,7 +99,7 @@ module.exports = function (db) {
   router.delete("/delete/:id", async (req, res) => {
     try {
       const data = await db
-        .collection("farraz")
+        .collection('farraz')
         .deleteOne({ '_id': ObjectId(`${req.params.id}`) });
       console.log(data)
       res.redirect('/');

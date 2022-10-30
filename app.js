@@ -10,7 +10,7 @@ const uri = "mongodb://127.0.0.1:27017";
 
 const client = new MongoClient(uri);
 
-const dbName = "farraz"
+const dbName = "mongodb"
 
 async function main() {
   try {
