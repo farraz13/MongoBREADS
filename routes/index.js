@@ -11,54 +11,54 @@ module.exports = function (db) {
       const page = req.query.page || 1;
       const limit = 3;
       const offset = (page - 1) * limit;
-      const wheres = {};
+      const loc = {};
       const filter = `&idCheck=${req.query.idCheck}&id=${req.query.id}&stringCheck=${req.query.stringCheck}&string=${req.query.string}&integerCheck=${req.query.integerCheck}&integer=${req.query.integer}&floatCheck=${req.query.floatCheck}&float=${req.query.float}&dateCheck=${req.query.dateCheck}&startDate=${req.query.startDate}&endDate=${req.query.endDate}&booleanCheck=${req.query.booleanCheck}&boolean=${req.query.boolean}`;
-      const sortMongo = {}
+      const mongoSort = {}
       let sortBy = req.query.sortBy || "string"
       let sortMode = req.query.sortMode || "asc"
 
-      sortMongo[sortBy] = sortMode == "asc" ? 1 : -1;
+      mongoSort[sortBy] = sortMode == "asc" ? 1 : -1;
 
 
       if (req.query.string && req.query.stringCheck == "on") {
-        wheres["strings"] = new RegExp(`${req.query.string}`, "i");
+        loc["strings"] = new RegExp(`${req.query.string}`, "i");
       }
 
       if (req.query.integer && req.query.integerCheck == "on") {
-        wheres["integers"] = parseInt(req.query.integer);
+        loc["integers"] = parseInt(req.query.integer);
       }
 
       if (req.query.float && req.query.floatCheck == "on") {
-        wheres["floats"] = JSON.parse(req.query.float);
+        loc["floats"] = JSON.parse(req.query.float);
       }
 
       if (req.query.dateCheck == "on") {
         if (req.query.startDate != "" && req.query.endDate != "") {
-          wheres["dates"] = {
+          loc["dates"] = {
             $gte: new Date(`${req.query.startDate}`),
             $lte: new Date(`${req.query.endDate}`),
           };
         } else if (req.query.startDate) {
-          wheres["dates"] = { $gte: new Date(`${req.query.startDate}`) };
+          loc["dates"] = { $gte: new Date(`${req.query.startDate}`) };
         } else if (req.query.endDate) {
-          wheres["dates"] = { $lte: new Date(`${req.query.endDate}`) };
+          loc["dates"] = { $lte: new Date(`${req.query.endDate}`) };
         }
       }
 
       if (req.query.boolean && req.query.booleanCheck == "on") {
-        wheres["booleans"] = JSON.parse(req.query.boolean);
+        loc["booleans"] = JSON.parse(req.query.boolean);
       }
 
       const result = await db.collection("farraz")
-        .find(wheres)
+        .find(loc)
         .toArray()
       var total = result.length;
       const pages = Math.ceil(total / limit);
       const data = await db.collection("farraz")
-        .find(wheres)
+        .find(loc)
         .skip(offset)
         .limit(limit)
-        .sort(sortMongo)
+        .sort(mongoSort)
         .toArray()
       res.render("index", {
         data,
@@ -96,18 +96,14 @@ module.exports = function (db) {
     }
   });
 
-  router.delete("/delete/:id", async (req, res) => {
-    try {
-      const data = await db
-        .collection('farraz')
-        .deleteOne({ '_id': ObjectId(`${req.params.id}`) });
-      console.log(data)
-      res.redirect('/');
-    } catch (err) {
-      console.log(err)
-      res.send(err);
-    }
-  });
+  router.get('/delete/:id', (req, res) => {
+    db.collection("faraz").deleteOne({ "_id": ObjectId(`${req.params.id}`) }, (err) => {
+        if (err) {
+            console.error(err)
+        }
+    })
+    res.redirect('/')
+})
 
   router.get("/edit/:id", async (req, res) => {
     try {
